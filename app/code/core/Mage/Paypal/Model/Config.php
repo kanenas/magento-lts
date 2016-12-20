@@ -808,6 +808,11 @@ class Mage_Paypal_Model_Config
             if ($shouldEmulate) {
                 $locale->revert();
             }
+            // Show the US page when there is no "What Is PayPal" popup window for $countryCode
+            $countryCodeOLCWhatIsPayPal = array("GR");
+            if (in_array($countryCode, $countryCodeOLCWhatIsPayPal)) {
+                $countryCode = 'US';
+            }
         }
         return sprintf('https://www.paypal.com/%s/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside',
             strtolower($countryCode)
